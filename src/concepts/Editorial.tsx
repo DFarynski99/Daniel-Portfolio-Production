@@ -221,7 +221,7 @@ const Editorial = () => {
             </div>
             {/* headline */}
             <h1 className="font-display text-[clamp(2.5rem,7vw,7rem)] uppercase leading-[0.92] tracking-tight">
-              I secure{' '}
+              I <span className="marker-hl">secure</span>{' '}
               <span className="font-serif lowercase italic tracking-normal text-foreground/55">
                 and
               </span>{' '}

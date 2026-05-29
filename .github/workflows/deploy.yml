@@ -1,0 +1,60 @@
+name: Deploy to S3
+
+# Build the site and deploy on every push to main.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: {} # allows manual runs from the Actions tab
+
+# Avoid overlapping deploys; cancel an in-progress run if a newer push lands.
+concurrency:
+  group: deploy-prod
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Deploy to both buckets (apex + www)
+        run: |
+          for BUCKET in "${{ secrets.S3_BUCKET_APEX }}" "${{ secrets.S3_BUCKET_WWW }}"; do
+            echo "Deploying to s3://$BUCKET ..."
+            # Hashed assets — safe to cache forever.
+            aws s3 sync dist/ "s3://$BUCKET/" \
+              --delete \
+              --cache-control "public,max-age=31536000,immutable" \
+              --exclude index.html
+            # index.html — never cache, so new deploys show up immediately.
+            aws s3 cp dist/index.html "s3://$BUCKET/index.html" \
+              --cache-control "no-cache"
+          done
+
+      - name: Purge Cloudflare cache
+        run: |
+          curl -fsS -X POST \
+            "https://api.cloudflare.com/client/v4/zones/${{ secrets.CLOUDFLARE_ZONE_ID }}/purge_cache" \
+            -H "Authorization: Bearer ${{ secrets.CLOUDFLARE_API_TOKEN }}" \
+            -H "Content-Type: application/json" \
+            --data '{"purge_everything":true}'
