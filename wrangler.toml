@@ -1,0 +1,17 @@
+name = "danielfarynski-contact"
+main = "worker/index.js"
+compatibility_date = "2024-09-23"
+
+# Bind the Worker to /api/contact on the live domain so the form can POST
+# same-origin. Requires danielfarynski.com to be an active zone in this
+# Cloudflare account.
+routes = [
+  { pattern = "danielfarynski.com/api/contact", zone_name = "danielfarynski.com" },
+  { pattern = "www.danielfarynski.com/api/contact", zone_name = "danielfarynski.com" },
+]
+
+# Public, non-secret config. The Resend API key is NOT here — it's a secret:
+#   npx wrangler secret put RESEND_API_KEY
+[vars]
+CONTACT_TO = "me@danielfarynski.com"
+CONTACT_FROM = "Daniel Farynski Portfolio <contact@info.danielfarynski.com>"

@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import SiteHeader from '@/components/SiteHeader';
 import SiteFooter from '@/components/SiteFooter';
 import TimelineVisual from '@/components/TimelineVisual';
+import ContactForm from '@/components/ContactForm';
 import {
   Carousel,
   CarouselContent,
@@ -203,19 +204,33 @@ const Editorial = () => {
       {/* HERO */}
       <section className="relative overflow-hidden px-5 pb-16 pt-28 md:px-10 md:pt-36">
         <div className="mx-auto max-w-[1400px]">
-          <p className="mb-8 font-mono text-xs font-semibold uppercase tracking-[0.15em] text-foreground/70 fade-up">
-            {profile.role} · {profile.location}
-          </p>
-          <h1 className="font-display text-[clamp(2.75rem,9vw,8.5rem)] uppercase leading-[0.92] tracking-tight fade-up">
-            I secure{' '}
-            <span className="font-serif lowercase italic tracking-normal text-foreground/55">
-              and
-            </span>{' '}
-            build the{' '}
-            <span className="marker-hl">software</span>
-            <br />
-            businesses run on.
-          </h1>
+          <div className="grid grid-cols-1 gap-7 fade-up md:grid-cols-[auto_1fr] md:items-start md:gap-10">
+            {/* identity: headshot + name/role */}
+            <div className="w-32 shrink-0 sm:w-40 md:w-[176px]">
+              <img
+                src={profile.headshot}
+                alt={profile.name}
+                className="aspect-[176/220] w-full border border-foreground/20 object-cover"
+              />
+              <div className="mt-4 font-display text-base uppercase leading-none tracking-tight">
+                {profile.name}
+              </div>
+              <p className="mt-2 font-mono text-[10px] font-semibold uppercase leading-relaxed tracking-[0.14em] text-foreground/70">
+                {profile.role} · {profile.location}
+              </p>
+            </div>
+            {/* headline */}
+            <h1 className="font-display text-[clamp(2.5rem,7vw,7rem)] uppercase leading-[0.92] tracking-tight">
+              I secure{' '}
+              <span className="font-serif lowercase italic tracking-normal text-foreground/55">
+                and
+              </span>{' '}
+              build the{' '}
+              <span className="marker-hl">software</span>
+              <br />
+              businesses run on.
+            </h1>
+          </div>
 
           <p className="mt-8 max-w-2xl font-display text-2xl uppercase leading-tight tracking-tight text-foreground/25 md:text-4xl">
             Trusted by 50+ Australian businesses.
@@ -518,22 +533,37 @@ const Editorial = () => {
           <span className="font-mono text-xs font-semibold uppercase tracking-[0.15em] text-background/70">
             06 / Contact
           </span>
-          <h2 className="mt-6 max-w-4xl font-display text-4xl uppercase leading-[0.95] tracking-tight md:text-8xl">
+          <h2 className="mt-6 max-w-4xl font-display text-4xl uppercase leading-[0.95] tracking-tight md:text-7xl">
             Let's secure <span className="marker-hl text-accent-foreground">what you build.</span>
           </h2>
-          <div className="mt-12 grid grid-cols-1 gap-8 border-t border-background/20 pt-10 sm:grid-cols-3">
-            <a href={`mailto:${profile.email}`} className="group">
-              <div className="font-mono text-[11px] uppercase tracking-[0.15em] text-background/50">Email</div>
-              <div className="mt-1 text-lg group-hover:text-accent">{profile.email}</div>
-            </a>
-            <a href={`tel:${profile.phone}`} className="group">
-              <div className="font-mono text-[11px] uppercase tracking-[0.15em] text-background/50">Phone</div>
-              <div className="mt-1 text-lg group-hover:text-accent">{profile.phone}</div>
-            </a>
-            <a href={profile.linkedin} target="_blank" rel="noopener noreferrer" className="group">
-              <div className="font-mono text-[11px] uppercase tracking-[0.15em] text-background/50">LinkedIn</div>
-              <div className="mt-1 text-lg group-hover:text-accent">Connect →</div>
-            </a>
+
+          <div className="mt-12 grid grid-cols-1 gap-12 border-t border-background/20 pt-10 lg:grid-cols-[1.4fr_1fr] lg:gap-16">
+            {/* form */}
+            <div>
+              <p className="mb-7 max-w-md text-background/70">
+                Have a security engagement or a web project in mind? Send a message and I'll get back to you.
+              </p>
+              <ContactForm />
+            </div>
+
+            {/* direct details */}
+            <div className="space-y-6">
+              <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-background/50">
+                Or reach me directly
+              </span>
+              <a href={`mailto:${profile.email}`} className="group block">
+                <div className="font-mono text-[11px] uppercase tracking-[0.15em] text-background/50">Email</div>
+                <div className="mt-1 text-lg transition-colors group-hover:text-accent">{profile.email}</div>
+              </a>
+              <a href={`tel:${profile.phone}`} className="group block">
+                <div className="font-mono text-[11px] uppercase tracking-[0.15em] text-background/50">Phone</div>
+                <div className="mt-1 text-lg transition-colors group-hover:text-accent">{profile.phone}</div>
+              </a>
+              <a href={profile.linkedin} target="_blank" rel="noopener noreferrer" className="group block">
+                <div className="font-mono text-[11px] uppercase tracking-[0.15em] text-background/50">LinkedIn</div>
+                <div className="mt-1 text-lg transition-colors group-hover:text-accent">Connect →</div>
+              </a>
+            </div>
           </div>
         </div>
       </section>

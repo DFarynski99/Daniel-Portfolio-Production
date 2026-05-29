@@ -27,6 +27,9 @@ import captchaBypass from '../captcha-opt.mp4';
 import boostExploitation from '../boost-opt.jpg';
 import acsArticle from '../acs-article.png';
 
+// Profile headshot
+import headshot from '../headshot.jpg';
+
 // Web development project screenshots (fresh 16:9 hero captures)
 import rtt1 from '../web-rtt.png';
 import subahireImage from '../web-subahire.jpg';
@@ -40,6 +43,7 @@ export const profile = {
   name: 'Daniel Farynski',
   role: 'Cybersecurity Consultant & Software Engineer',
   location: 'Australia',
+  headshot,
   email: 'me@danielfarynski.com',
   phone: '+61 431 548 963',
   linkedin: 'https://linkedin.com/in/danielfarynski',
