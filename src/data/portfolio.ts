@@ -13,6 +13,8 @@ import hackeroneAustralia from '../HackerOne-Australia.jpeg';
 import hackeroneHilton from '../HackerOne-Hilton.jpeg';
 import hackeroneAdobe from '../HackerOne-Adobe.png';
 import hackeroneWhoop from '../HackerOne-Whoop.png';
+import hackeronePepsico from '../hackerone-pepsico.png';
+import hackeroneQinetiq from '../hackerone-qinetiq.png';
 import waGov from '../WA-GOV.png';
 import servicensw from '../servicensw.png';
 import moad from '../moad.png';
@@ -119,6 +121,24 @@ export const bugBountyRankings: Ranking[] = [
       'Reached Rank #10 for 2025 on the Adobe BBP. Findings include complex DNS-related issues allowing takeover of Adobe-owned subdomains.',
     icon: Trophy,
     image: hackeroneAdobe,
+  },
+  {
+    title: 'QinetiQ Response',
+    ranking: 'Rank #1',
+    period: 'All-Time',
+    description:
+      'Reached Rank #1 All-Time on the QinetiQ Response program (defence & security technology) for identifying and disclosing vulnerabilities.',
+    icon: Trophy,
+    image: hackeroneQinetiq,
+  },
+  {
+    title: 'PepsiCo VDP',
+    ranking: 'Rank #3',
+    period: 'All-Time',
+    description:
+      'Reached Rank #3 All-Time on the PepsiCo Vulnerability Disclosure Program for identifying and reporting security vulnerabilities.',
+    icon: Trophy,
+    image: hackeronePepsico,
   },
   {
     title: 'WA Government VDP',
