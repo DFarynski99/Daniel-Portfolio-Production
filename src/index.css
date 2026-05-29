@@ -1,0 +1,198 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================
+   Daniel Farynski — Portfolio
+   Three fundamentally different concepts, selected via
+   [data-concept] (set in main.tsx):
+     editorial  — Swiss typographic, light, lime highlighter
+     quiet      — premium airy minimalism, soft neutrals
+     dossier    — refined dark "capability statement", gold accent
+   ============================================================ */
+
+@layer base {
+  :root {
+    --radius: 0.5rem;
+    --font-sans: "Inter";
+    --font-mono: "JetBrains Mono";
+    --font-display: "Inter";
+    --font-serif: "Instrument Serif";
+  }
+
+  /* ---------- EDITORIAL ---------- */
+  [data-concept="editorial"] {
+    --background: 60 8% 95%;
+    --foreground: 0 0% 5%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 5%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 5%;
+    --primary: 0 0% 5%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 60 6% 90%;
+    --secondary-foreground: 0 0% 5%;
+    --muted: 60 6% 90%;
+    --muted-foreground: 60 3% 38%;
+    --accent: 72 100% 50%;
+    --accent-foreground: 0 0% 5%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 60 7% 84%;
+    --input: 60 7% 84%;
+    --ring: 0 0% 5%;
+    --radius: 0rem;
+
+    --font-display: "Anton";
+    --font-sans: "Inter";
+    --font-mono: "JetBrains Mono";
+    --font-serif: "Instrument Serif";
+
+    --marker: 72 100% 50%;
+  }
+
+  /* ---------- QUIET PREMIUM ---------- */
+  [data-concept="quiet"] {
+    --background: 0 0% 100%;
+    --foreground: 240 6% 10%;
+    --card: 0 0% 99%;
+    --card-foreground: 240 6% 10%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 6% 10%;
+    --primary: 240 6% 10%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 240 5% 96%;
+    --secondary-foreground: 240 6% 10%;
+    --muted: 240 5% 96%;
+    --muted-foreground: 240 4% 46%;
+    --accent: 221 83% 53%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 240 6% 90%;
+    --input: 240 6% 90%;
+    --ring: 240 6% 10%;
+    --radius: 1rem;
+
+    --font-display: "Inter";
+    --font-sans: "Inter";
+    --font-mono: "JetBrains Mono";
+    --font-serif: "Instrument Serif";
+  }
+
+  /* ---------- DOSSIER ---------- */
+  [data-concept="dossier"] {
+    --background: 222 16% 7%;
+    --foreground: 240 7% 91%;
+    --card: 224 18% 11%;
+    --card-foreground: 240 7% 91%;
+    --popover: 224 18% 11%;
+    --popover-foreground: 240 7% 91%;
+    --primary: 36 38% 60%;
+    --primary-foreground: 222 16% 7%;
+    --secondary: 222 16% 14%;
+    --secondary-foreground: 240 7% 91%;
+    --muted: 222 16% 14%;
+    --muted-foreground: 225 7% 58%;
+    --accent: 36 38% 60%;
+    --accent-foreground: 222 16% 7%;
+    --destructive: 0 72% 55%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 222 12% 20%;
+    --input: 222 12% 18%;
+    --ring: 36 38% 60%;
+    --radius: 0.25rem;
+
+    --font-display: "Space Grotesk";
+    --font-sans: "Inter";
+    --font-mono: "JetBrains Mono";
+    --font-serif: "Instrument Serif";
+  }
+
+  /* Fallback before JS sets data-concept (editorial defaults) */
+  :root:not([data-concept]) {
+    --background: 60 8% 95%;
+    --foreground: 0 0% 5%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 5%;
+    --primary: 0 0% 5%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 60 6% 90%;
+    --muted: 60 6% 90%;
+    --muted-foreground: 60 3% 38%;
+    --accent: 72 100% 50%;
+    --accent-foreground: 0 0% 5%;
+    --border: 60 7% 84%;
+    --ring: 0 0% 5%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+  ::selection {
+    background: hsl(var(--accent));
+    color: hsl(var(--accent-foreground));
+  }
+  .tabular-nums {
+    font-variant-numeric: tabular-nums;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer components {
+  /* Lime highlighter marker (editorial) — a hand-drawn "swipe" look:
+     a band (not full line height) with softly rounded ends and a slight
+     rotation, so it reads like a real highlighter rather than a solid box. */
+  .marker-hl {
+    display: inline-block;
+    background-image: linear-gradient(
+      transparent 10%,
+      hsl(var(--marker)) 10%,
+      hsl(var(--marker)) 90%,
+      transparent 90%
+    );
+    color: hsl(var(--accent-foreground));
+    padding: 0 0.14em;
+    border-radius: 0.16em;
+    transform: rotate(-1.4deg);
+  }
+
+  /* Monospace eyebrow label, shared but styled per concept */
+  .eyebrow {
+    @apply font-mono text-xs uppercase tracking-[0.18em] text-muted-foreground;
+  }
+
+  /* Unified button system (used across the whole site) */
+  .btn-lime {
+    @apply inline-flex w-fit items-center justify-center gap-2 bg-accent px-5 py-3 font-mono text-xs font-semibold uppercase tracking-[0.12em] text-accent-foreground transition-opacity hover:opacity-90;
+  }
+  .btn-outline {
+    @apply inline-flex w-fit items-center justify-center gap-2 border border-foreground px-5 py-3 font-mono text-xs font-semibold uppercase tracking-[0.12em] text-foreground transition-colors hover:bg-foreground hover:text-background;
+  }
+}
+
+/* ---------- Animations ---------- */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.fade-up { animation: fade-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.animate-marquee { animation: marquee 30s linear infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .fade-up, .animate-marquee { animation: none; }
+}
