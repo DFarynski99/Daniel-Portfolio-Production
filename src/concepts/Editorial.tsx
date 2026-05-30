@@ -5,6 +5,7 @@ import SiteHeader from '@/components/SiteHeader';
 import SiteFooter from '@/components/SiteFooter';
 import TimelineVisual from '@/components/TimelineVisual';
 import ContactForm from '@/components/ContactForm';
+import WebVideo from '@/components/WebVideo';
 import {
   Carousel,
   CarouselContent,
@@ -265,10 +266,63 @@ const Editorial = () => {
         </div>
       </div>
 
-      {/* SELECTED WORK */}
-      <section id="work" className="px-5 py-20 md:px-10 md:py-28">
+      {/* WEB DEVELOPMENT */}
+      <section id="web" className="px-5 py-20 md:px-10 md:py-28">
         <div className="mx-auto max-w-[1400px]">
-          <SectionTag n="01">Selected Work</SectionTag>
+          <SectionTag n="01">Web Development</SectionTag>
+          <h2 className="mb-12 max-w-3xl font-display text-4xl uppercase leading-[0.95] tracking-tight md:text-6xl">
+            Modern web apps, built for real businesses.
+          </h2>
+          <div className="flex flex-wrap justify-center gap-4">
+            {webProjects.map((p) => (
+              <div
+                key={p.title}
+                className="group flex basis-full grow-0 flex-col border border-foreground/15 bg-background p-6 transition-colors hover:bg-secondary sm:basis-[calc(50%-0.5rem)] md:p-8"
+              >
+                <div className="mb-5 aspect-video overflow-hidden border border-foreground/10 bg-secondary">
+                  {p.video ? (
+                    <WebVideo src={p.video} poster={p.image} className="h-full w-full object-cover" />
+                  ) : (
+                    <img src={p.image} alt={p.title} className="h-full w-full object-cover" />
+                  )}
+                </div>
+                <a
+                  href={p.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group/link mb-2 flex w-fit items-center gap-2"
+                >
+                  <h3 className="font-display text-xl uppercase tracking-tight underline decoration-foreground/30 decoration-2 underline-offset-[6px] transition-colors group-hover/link:decoration-accent">
+                    {p.title}
+                  </h3>
+                  <ArrowUpRight className="h-5 w-5 shrink-0 text-foreground/60 transition-transform group-hover/link:-translate-y-0.5 group-hover/link:translate-x-0.5 group-hover/link:text-foreground" />
+                </a>
+                <p className="mb-5 text-[15px] leading-relaxed text-foreground/70">{p.description}</p>
+                <div className="mt-auto">
+                  <div className="mb-2.5 font-mono text-[10px] uppercase tracking-[0.18em] text-foreground/45">
+                    Built with
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    {p.technologies.map((t) => (
+                      <span
+                        key={t}
+                        className="bg-accent px-2.5 py-1 text-[11px] font-semibold text-accent-foreground"
+                      >
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* SELECTED WORK */}
+      <section id="work" className="border-t border-foreground/15 px-5 py-20 md:px-10 md:py-28">
+        <div className="mx-auto max-w-[1400px]">
+          <SectionTag n="02">Selected Work</SectionTag>
           <h2 className="mb-12 max-w-3xl font-display text-4xl uppercase leading-[0.95] tracking-tight md:text-6xl">
             Real-world security work with real consequences.
           </h2>
@@ -330,7 +384,7 @@ const Editorial = () => {
       {/* ABOUT */}
       <section id="about" className="border-t border-foreground/15 bg-secondary/40 px-5 py-20 md:px-10 md:py-28">
         <div className="mx-auto max-w-[1400px]">
-          <SectionTag n="02">About</SectionTag>
+          <SectionTag n="03">About</SectionTag>
           <div className="grid grid-cols-1 gap-12 md:grid-cols-[1fr_1.4fr]">
             <h2 className="font-display text-4xl uppercase leading-[0.95] tracking-tight md:text-5xl">
               {profile.name}
@@ -351,7 +405,7 @@ const Editorial = () => {
         <div className="mx-auto max-w-[1400px]">
           <div className="mb-8 flex items-center gap-3 border-b border-background/20 pb-3">
             <span className="font-mono text-xs font-semibold uppercase tracking-[0.15em] text-background/70">
-              03 / Flagship Initiative
+              04 / Flagship Initiative
             </span>
           </div>
           <h2 className="max-w-4xl font-display text-5xl uppercase leading-[0.92] tracking-tight md:text-8xl">
@@ -440,67 +494,6 @@ const Editorial = () => {
           {/* timeline carousel (auto-scrolling) */}
           <div className="mt-16">
             <TimelineCarousel />
-          </div>
-        </div>
-      </section>
-
-      {/* WEB DEVELOPMENT */}
-      <section id="web" className="px-5 py-20 md:px-10 md:py-28">
-        <div className="mx-auto max-w-[1400px]">
-          <SectionTag n="04">Web Development</SectionTag>
-          <h2 className="mb-12 max-w-3xl font-display text-4xl uppercase leading-[0.95] tracking-tight md:text-6xl">
-            Modern web apps, built for real businesses.
-          </h2>
-          <div className="flex flex-wrap justify-center gap-4">
-            {webProjects.map((p) => (
-              <a
-                key={p.title}
-                href={p.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group flex basis-full grow-0 flex-col border border-foreground/15 bg-background p-6 transition-colors hover:bg-secondary sm:basis-[calc(50%-0.5rem)] md:p-8"
-              >
-                <div className="mb-5 aspect-video overflow-hidden border border-foreground/10 bg-secondary">
-                  {p.video ? (
-                    <video
-                      src={p.video}
-                      poster={p.image}
-                      autoPlay
-                      loop
-                      muted
-                      playsInline
-                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-                    />
-                  ) : (
-                    <img
-                      src={p.image}
-                      alt={p.title}
-                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-                    />
-                  )}
-                </div>
-                <div className="mb-2 flex items-center justify-between gap-3">
-                  <h3 className="font-display text-xl uppercase tracking-tight">{p.title}</h3>
-                  <ArrowUpRight className="h-5 w-5 shrink-0 text-foreground/60 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-foreground" />
-                </div>
-                <p className="mb-5 text-[15px] leading-relaxed text-foreground/70">{p.description}</p>
-                <div className="mt-auto">
-                  <div className="mb-2.5 font-mono text-[10px] uppercase tracking-[0.18em] text-foreground/45">
-                    Built with
-                  </div>
-                  <div className="flex flex-wrap gap-2">
-                    {p.technologies.map((t) => (
-                      <span
-                        key={t}
-                        className="bg-accent px-2.5 py-1 text-[11px] font-semibold text-accent-foreground"
-                      >
-                        {t}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </a>
-            ))}
           </div>
         </div>
       </section>

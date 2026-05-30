@@ -33,13 +33,18 @@ import acsArticle from '../acs-article.png';
 import headshot from '../headshot.jpg';
 
 // Web development project screenshots (fresh 16:9 hero captures)
-import rtt1 from '../web-rtt.png';
-import subahireImage from '../web-subahire.jpg';
-import supaping from '../web-supaping.jpg';
-import documentSigning from '../web-docsign.png';
-import portfolioWebsite from '../web-portfolio.png';
 import acmeStudioVideo from '../web-acme.mp4';
-import acmeStudioPoster from '../web-acme-poster.png';
+import acmeStudioPoster from '../web-acme-poster.jpg';
+import rttVideo from '../web-rtt.mp4';
+import rttPoster from '../web-rtt-poster.jpg';
+import subahireVideo from '../web-subahire.mp4';
+import subahirePoster from '../web-subahire-poster.jpg';
+import supapingVideo from '../web-supaping.mp4';
+import supapingPoster from '../web-supaping-poster.jpg';
+import docsignVideo from '../web-docsign.mp4';
+import docsignPoster from '../web-docsign-poster.jpg';
+import portfolioVideo from '../web-portfolio.mp4';
+import portfolioPoster from '../web-portfolio-poster.jpg';
 
 export const profile = {
   name: 'Daniel Farynski',
@@ -268,7 +273,7 @@ export const projectDark = {
   results: [
     { value: '50+', label: 'Australian businesses assisted' },
     { value: '2K+', label: 'User accounts protected' },
-    { value: '6+', label: 'Months of active monitoring' },
+    { value: '24+', label: 'Months of active monitoring' },
   ],
   timeline: [
     {
@@ -332,7 +337,8 @@ export const webProjects: WebProject[] = [
     title: 'R T Accounting & Taxation',
     description:
       'High-quality accounting & taxation services site, built with TypeScript and React, with Resend & Supabase powering contact submissions.',
-    image: rtt1,
+    image: rttPoster,
+    video: rttVideo,
     url: 'https://rttaxation.com.au',
     technologies: ['React', 'TypeScript', 'Supabase', 'Resend'],
   },
@@ -340,7 +346,8 @@ export const webProjects: WebProject[] = [
     title: 'Suba Hire',
     description:
       'Premium e-bike rentals for urban professionals, tourists and commuters, offering the freedom of electric mobility.',
-    image: subahireImage,
+    image: subahirePoster,
+    video: subahireVideo,
     url: 'https://subahire.com.au',
     technologies: ['React', 'TypeScript', 'Supabase', 'Resend'],
   },
@@ -351,21 +358,23 @@ export const webProjects: WebProject[] = [
     image: acmeStudioPoster,
     video: acmeStudioVideo,
     url: 'https://acmestudio.danielfarynski.com',
-    technologies: ['Node.js', 'GitHub Actions', 'CI/CD', 'AWS S3'],
+    technologies: ['JavaScript', 'Node.js', 'GitHub Actions', 'CI/CD', 'AWS S3'],
   },
   {
     title: 'Document Signing',
     description:
       'Lets a business serve a static contract, have the customer sign and submit it, then emails the signed contract to both parties.',
-    image: documentSigning,
+    image: docsignPoster,
+    video: docsignVideo,
     url: 'https://documentsign.danielfarynski.com',
-    technologies: ['React', 'TypeScript', 'Supabase', 'Resend'],
+    technologies: ['React', 'Tailwind', 'Cloudflare Pages', 'Cloudflare D1', 'Cloudflare KV', 'Cloudflare Turnstile'],
   },
   {
     title: 'Portfolio Website',
     description:
       'A personal portfolio showcasing cybersecurity projects, honours and achievements alongside software and web development work.',
-    image: portfolioWebsite,
+    image: portfolioPoster,
+    video: portfolioVideo,
     url: 'https://danielfarynski.com',
     technologies: ['React', 'TypeScript', 'Supabase', 'Resend'],
   },
@@ -373,16 +382,17 @@ export const webProjects: WebProject[] = [
     title: 'SupaPing',
     description:
       'Monitors free-tier Supabase projects to prevent inactivity pauses by injecting zero-impact daily queries, saving $25/month vs. the Pro tier.',
-    image: supaping,
+    image: supapingPoster,
+    video: supapingVideo,
     url: 'https://supaping.com',
     technologies: ['React', 'TypeScript', 'Supabase', 'AWS'],
   },
 ];
 
 export const navItems = [
+  { name: 'Web Development', href: '/#web' },
   { name: 'Work', href: '/#work' },
   { name: 'About', href: '/#about' },
   { name: 'Project Dark', href: '/#project-dark' },
-  { name: 'Web Development', href: '/#web' },
   { name: 'Contact', href: '/#contact' },
 ];
