@@ -36,10 +36,10 @@ import headshot from '../headshot.jpg';
 import rtt1 from '../web-rtt.png';
 import subahireImage from '../web-subahire.jpg';
 import supaping from '../web-supaping.jpg';
-import aquaFlowPlumbing from '../web-aquaflow.png';
-import aquaProCare from '../web-aquacare.png';
 import documentSigning from '../web-docsign.png';
 import portfolioWebsite from '../web-portfolio.png';
+import acmeStudioVideo from '../web-acme.mp4';
+import acmeStudioPoster from '../web-acme-poster.png';
 
 export const profile = {
   name: 'Daniel Farynski',
@@ -321,6 +321,8 @@ export type WebProject = {
   title: string;
   description: string;
   image: string;
+  /** Optional looping video preview, shown instead of the static image. */
+  video?: string;
   url: string;
   technologies: string[];
 };
@@ -343,28 +345,13 @@ export const webProjects: WebProject[] = [
     technologies: ['React', 'TypeScript', 'Supabase', 'Resend'],
   },
   {
-    title: 'SupaPing',
+    title: 'ACME Studio',
     description:
-      'Monitors free-tier Supabase projects to prevent inactivity pauses by injecting zero-impact daily queries, saving $25/month vs. the Pro tier.',
-    image: supaping,
-    url: 'https://supaping.com',
-    technologies: ['React', 'TypeScript', 'Supabase', 'AWS'],
-  },
-  {
-    title: 'AquaFlow Plumbing',
-    description:
-      'Modern full-stack React/TypeScript web application for plumbers, showcasing capabilities, pricing and contact options.',
-    image: aquaFlowPlumbing,
-    url: 'https://plumbing.danielfarynski.com',
-    technologies: ['React', 'TypeScript', 'Supabase', 'Resend'],
-  },
-  {
-    title: 'AquaCare Pro',
-    description:
-      'Full-stack web application for aquarium specialists offering maintenance services and call-outs.',
-    image: aquaProCare,
-    url: 'https://aquarium.danielfarynski.com',
-    technologies: ['React', 'TypeScript', 'Supabase', 'Resend'],
+      'A bold, motion-led landing experience for a creative studio, with cursor-reactive lighting and cinematic scroll transitions that bring the brand to life.',
+    image: acmeStudioPoster,
+    video: acmeStudioVideo,
+    url: 'https://acmestudio.danielfarynski.com',
+    technologies: ['Node.js', 'GitHub Actions', 'CI/CD', 'AWS S3'],
   },
   {
     title: 'Document Signing',
@@ -381,6 +368,14 @@ export const webProjects: WebProject[] = [
     image: portfolioWebsite,
     url: 'https://danielfarynski.com',
     technologies: ['React', 'TypeScript', 'Supabase', 'Resend'],
+  },
+  {
+    title: 'SupaPing',
+    description:
+      'Monitors free-tier Supabase projects to prevent inactivity pauses by injecting zero-impact daily queries, saving $25/month vs. the Pro tier.',
+    image: supaping,
+    url: 'https://supaping.com',
+    technologies: ['React', 'TypeScript', 'Supabase', 'AWS'],
   },
 ];
 

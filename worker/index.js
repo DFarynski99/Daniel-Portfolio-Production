@@ -40,6 +40,25 @@ const esc = (s) =>
 
 const emailRe = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
 
+// Verify a Cloudflare Turnstile token server-side. Returns true on success.
+async function verifyTurnstile(secret, token, request) {
+  if (!token) return false;
+  const form = new URLSearchParams({ secret, response: token });
+  const ip = request.headers.get('CF-Connecting-IP');
+  if (ip) form.set('remoteip', ip);
+  try {
+    const r = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: form,
+    });
+    const out = await r.json();
+    return out.success === true;
+  } catch {
+    return false;
+  }
+}
+
 export default {
   async fetch(request, env) {
     if (request.method === 'OPTIONS') {
@@ -60,9 +79,17 @@ export default {
     const email = (data?.email || '').toString().trim();
     const message = (data?.message || '').toString().trim();
     const honeypot = (data?.company || '').toString().trim();
+    const turnstileToken = (data?.turnstileToken || '').toString();
 
     // Silently accept bot submissions (honeypot filled) without sending.
     if (honeypot) return json({ ok: true }, 200, request);
+
+    // Cloudflare Turnstile — only enforced once the secret is configured,
+    // so the form keeps working locally / before the widget is set up.
+    if (env.TURNSTILE_SECRET) {
+      const human = await verifyTurnstile(env.TURNSTILE_SECRET, turnstileToken, request);
+      if (!human) return json({ error: 'Verification failed, please try again.' }, 403, request);
+    }
 
     const fields = [];
     if (name.length < 2) fields.push('name');

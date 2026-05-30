@@ -461,11 +461,23 @@ const Editorial = () => {
                 className="group flex basis-full grow-0 flex-col border border-foreground/15 bg-background p-6 transition-colors hover:bg-secondary sm:basis-[calc(50%-0.5rem)] md:p-8"
               >
                 <div className="mb-5 aspect-video overflow-hidden border border-foreground/10 bg-secondary">
-                  <img
-                    src={p.image}
-                    alt={p.title}
-                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-                  />
+                  {p.video ? (
+                    <video
+                      src={p.video}
+                      poster={p.image}
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                    />
+                  ) : (
+                    <img
+                      src={p.image}
+                      alt={p.title}
+                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                    />
+                  )}
                 </div>
                 <div className="mb-2 flex items-center justify-between gap-3">
                   <h3 className="font-display text-xl uppercase tracking-tight">{p.title}</h3>
